@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>Solar Installation Projects in East Kent | Voltek Solar</title>
+  <meta name="description" content="Recent solar panel, battery and EV charger installations by Voltek Solar in Margate, Ramsgate, Broadstairs, Canterbury, Whitstable, Deal, Dover and across East Kent.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#F6F3EE">
+  <link rel="canonical" href="https://www.[voltek-domain].co.uk/projects/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="./image-slot.js"></script>
+  <style>html{scroll-behavior:smooth}body{margin:0;background:#F6F3EE;color:#2B2724;font-family:'Inter Tight',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}*{box-sizing:border-box}a{color:inherit;text-decoration:none}a:hover{color:#A86A33}select{font-family:inherit}::selection{background:#E8B36A;color:#2B2724}</style>
+</helmet>
+<dc-import name="SiteNav" hero="light" current="projects" hint-size="100%,0px"></dc-import>
+<main id="top">
+  <section aria-labelledby="h1" style="background:linear-gradient(180deg,#F6F3EE,#F4E3D0)">
+    <div style="max-width:1400px;margin:0 auto;padding:clamp(130px,14vw,170px) clamp(20px,4vw,48px) clamp(40px,5vw,64px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:24px 64px;align-items:end">
+      <div data-reveal="" style="display:flex;flex-direction:column;gap:18px">
+        <nav aria-label="Breadcrumb" style="font-size:15px;color:#6E655D"><a href="Homepage.dc.html">Home</a> / <span aria-current="page" style="color:#2B2724">Projects</span></nav>
+        <h1 id="h1" style="margin:0;font-size:clamp(44px,7vw,104px);font-weight:500;letter-spacing:-0.04em;line-height:.96">Our <span style="background:linear-gradient(110deg,#D9A05A,#A86A33);-webkit-background-clip:text;background-clip:text;color:transparent">projects</span></h1>
+      </div>
+      <p data-reveal="" data-reveal-delay="120" style="margin:0;max-width:480px;font-size:18px;font-weight:300;line-height:1.65;color:#5E564F">Real installations by our own team across East Kent. Filter by service or town to find homes like yours.</p>
+    </div>
+  </section>
+
+  <div style="position:sticky;top:{{ barTop }};z-index:20;background:rgba(246,243,238,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(43,39,36,.1)">
+    <div style="max-width:1400px;margin:0 auto;padding:14px clamp(20px,4vw,48px);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px">
+      <div role="group" aria-label="Filter by service" style="display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;max-width:100%">
+        <sc-for list="{{ services }}" as="o" hint-placeholder-count="5">
+          <button type="button" aria-pressed="{{ o.sel }}" onClick="{{ o.on }}" style="flex:none;min-height:46px;padding:0 18px;border-radius:999px;border:1px solid {{ o.line }};background:{{ o.bg }};color:{{ o.fg }};font-family:inherit;font-size:15px;font-weight:500;cursor:pointer;transition:all .25s">{{ o.label }} <span style="opacity:.6">{{ o.count }}</span></button>
+        </sc-for>
+      </div>
+      <label style="display:flex;align-items:center;gap:10px;font-size:15px;font-weight:500">Town
+        <select value="{{ town }}" onChange="{{ setTown }}" style="min-height:46px;border-radius:999px;border:1px solid rgba(43,39,36,.2);background:#fff;padding:0 16px;font-size:15px;color:#2B2724">
+          <sc-for list="{{ townOpts }}" as="t" hint-placeholder-count="11"><option value="{{ t.v }}">{{ t.label }}</option></sc-for>
+        </select>
+      </label>
+    </div>
+  </div>
+
+  <section aria-label="Project gallery" style="max-width:1400px;margin:0 auto;padding:clamp(32px,4vw,48px) clamp(20px,4vw,48px) clamp(80px,10vw,140px)">
+    <p aria-live="polite" style="margin:0 0 24px;font-size:16px;color:#6E655D">Showing <strong style="color:#2B2724">{{ shown }}</strong> of {{ total }} projects{{ townLabel }}</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:16px;opacity:{{ gridO }};transform:{{ gridT }};transition:opacity .4s,transform .5s cubic-bezier(.2,.8,.2,1)">
+      <sc-for list="{{ items }}" as="p" hint-placeholder-count="9">
+        <article style="border-radius:24px;overflow:hidden;background:{{ p.bg }};color:{{ p.fg }};display:flex;flex-direction:column;transition:transform .45s cubic-bezier(.2,.8,.2,1),box-shadow .45s" style-hover="transform:translateY(-6px);box-shadow:0 30px 60px -36px rgba(43,39,36,.45)">
+          <div style="height:280px;position:relative"><image-slot id="{{ p.id }}" shape="rect" placeholder="{{ p.ph }}"></image-slot>
+            <span style="position:absolute;top:14px;left:14px;background:rgba(246,243,238,.94);color:#2B2724;border-radius:999px;padding:7px 12px;font-size:14px;font-weight:500;pointer-events:none">{{ p.svc }}</span>
+          </div>
+          <div style="padding:22px 24px 24px;display:flex;flex-direction:column;gap:10px">
+            <h2 style="margin:0;font-size:22px;font-weight:500;letter-spacing:-0.02em">{{ p.town }} · {{ p.size }}</h2>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;font-size:14px;color:{{ p.muted }}">
+              <span style="border:1px solid {{ p.line }};border-radius:999px;padding:6px 12px">{{ p.prop }}</span>
+              <span style="border:1px solid {{ p.line }};border-radius:999px;padding:6px 12px">Battery: {{ p.bat }}</span>
+              <span style="border:1px solid {{ p.line }};border-radius:999px;padding:6px 12px">[Month YYYY]</span>
+            </div>
+          </div>
+        </article>
+      </sc-for>
+    </div>
+    <sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
+      <div style="border:1px dashed rgba(43,39,36,.25);border-radius:24px;padding:56px 24px;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center">
+        <strong style="font-size:24px;font-weight:500;letter-spacing:-0.02em">No matching projects yet</strong>
+        <span style="font-size:16px;color:#5E564F">We may still have worked near you — ask us for local examples.</span>
+        <button type="button" onClick="{{ reset }}" style="min-height:48px;padding:0 20px;border-radius:999px;border:1px solid rgba(43,39,36,.25);background:transparent;font-family:inherit;font-size:15px;font-weight:500;cursor:pointer">Clear filters</button>
+      </div>
+    </sc-if>
+  </section>
+
+  <section aria-labelledby="cta-h" style="background:#2B2724;color:#F6F3EE;position:relative;overflow:hidden">
+    <div aria-hidden="true" style="position:absolute;left:50%;bottom:-60vmin;width:100vmin;height:100vmin;margin-left:-50vmin;border-radius:50%;background:radial-gradient(circle,rgba(232,179,106,.3),transparent 62%);pointer-events:none"></div>
+    <div data-reveal="" style="position:relative;max-width:1000px;margin:0 auto;padding:clamp(96px,12vw,160px) clamp(20px,4vw,48px);display:flex;flex-direction:column;align-items:center;text-align:center;gap:28px">
+      <h2 id="cta-h" style="margin:0;font-size:clamp(40px,6vw,88px);font-weight:500;letter-spacing:-0.04em;line-height:.98">Your roof could be <span style="background:linear-gradient(100deg,#F3CB8C,#C9894A);-webkit-background-clip:text;background-clip:text;color:transparent">next</span></h2>
+      <a href="Book%20a%20Survey.dc.html" style="display:inline-flex;align-items:center;min-height:56px;padding:0 28px;border-radius:999px;background:linear-gradient(135deg,#E8B36A,#C9894A);color:#2B2724;font-size:17px;font-weight:600">Book a Free Survey →</a>
+    </div>
+  </section>
+</main>
+<dc-import name="SiteFooter" hint-size="100%,520px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const TOWNS = ['Margate', 'Ramsgate', 'Broadstairs', 'Canterbury', 'Herne Bay', 'Whitstable', 'Deal', 'Dover', 'Sandwich', 'Folkestone'];
+const SVC = { solar: 'Solar panels', battery: 'Battery', ev: 'EV charger', commercial: 'Commercial' };
+const DATA = [
+  ['Ramsgate', 'battery', '[X.X]kW + [X]kWh', 'Semi-detached', 'Yes'], ['Canterbury', 'solar', '[X.X]kW', 'Terraced', 'No'],
+  ['Whitstable', 'battery', '[X.X]kW + [X]kWh', 'Detached', 'Yes'], ['Deal', 'ev', '[X.X]kW + EV charger', 'Detached', 'No'],
+  ['Sandwich', 'commercial', '[XX]kW', 'Warehouse', 'No'], ['Margate', 'solar', '[X.X]kW', 'Semi-detached', 'No'],
+  ['Broadstairs', 'battery', '[X]kWh add-on', 'Bungalow', 'Yes'], ['Herne Bay', 'solar', '[X.X]kW', 'Detached', 'No'],
+  ['Dover', 'ev', '[X]kW charger', 'Terraced', 'No'], ['Folkestone', 'battery', '[X.X]kW + [X]kWh', 'Semi-detached', 'Yes'],
+  ['Canterbury', 'commercial', '[XX]kW', 'School', 'No'], ['Ramsgate', 'solar', '[X.X]kW', 'Terraced', 'No']
+];
+class Component extends DCLogic {
+  state = { svc: 'all', town: 'all', o: 1, w: 1440 };
+  componentDidMount() {
+    const t = new URLSearchParams(location.search).get('town');
+    const m = t && TOWNS.find(x => x.toLowerCase().replace(/\s/g, '-') === t);
+    if (m) this.setState({ town: m });
+    this.r = () => this.setState({ w: window.innerWidth }); window.addEventListener('resize', this.r); this.r();
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this.r); }
+  filter(patch) { this.setState({ o: 0 }); setTimeout(() => this.setState({ ...patch, o: 1 }), 180); }
+  renderVals() {
+    const s = this.state;
+    const byTown = DATA.filter(d => s.town === 'all' || d[0] === s.town);
+    const list = byTown.filter(d => s.svc === 'all' || d[1] === s.svc);
+    const services = [['all', 'All']].concat(Object.entries(SVC)).map(([k, label]) => {
+      const sel = s.svc === k;
+      return { label, sel, count: k === 'all' ? byTown.length : byTown.filter(d => d[1] === k).length, on: () => this.filter({ svc: k }), bg: sel ? '#2B2724' : '#fff', fg: sel ? '#F6F3EE' : '#2B2724', line: sel ? '#2B2724' : 'rgba(43,39,36,.2)' };
+    });
+    const items = list.map((d, i) => {
+      const idx = DATA.indexOf(d), dark = i % 4 === 1 || i % 4 === 2 ? i % 2 === 1 : false;
+      return { town: d[0], svc: SVC[d[1]], size: d[2], prop: d[3], bat: d[4], id: 'projects-' + idx, ph: `${d[0]} · ${SVC[d[1]]} install photo`,
+        bg: dark ? '#2B2724' : '#EEEBE6', fg: dark ? '#F6F3EE' : '#2B2724', muted: dark ? '#C9BFB4' : '#5E564F', line: dark ? 'rgba(246,243,238,.2)' : 'rgba(43,39,36,.18)' };
+    });
+    return {
+      services, items, shown: list.length, total: DATA.length, empty: list.length === 0,
+      townLabel: s.town === 'all' ? '' : ' in ' + s.town, town: s.town,
+      townOpts: [{ v: 'all', label: 'All towns' }].concat(TOWNS.map(t => ({ v: t, label: t }))),
+      setTown: e => this.filter({ town: e.target.value }), reset: () => this.filter({ svc: 'all', town: 'all' }),
+      gridO: s.o, gridT: s.o ? 'none' : 'translateY(12px)', barTop: s.w >= 0 ? '72px' : '72px'
+    };
+  }
+}
+</script>
+</body>
+</html>

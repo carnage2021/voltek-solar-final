@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<header style="position:fixed;top:0;left:0;right:0;z-index:50;background:{{ navBg }};backdrop-filter:{{ navBlur }};-webkit-backdrop-filter:{{ navBlur }};border-bottom:1px solid {{ navLine }};transition:background .4s,border-color .4s;font-family:'Inter Tight',system-ui,sans-serif">
+  <nav aria-label="Main" style="max-width:1400px;margin:0 auto;padding:0 clamp(20px,4vw,48px);height:{{ navH }};display:flex;align-items:center;justify-content:space-between;gap:24px;transition:height .4s">
+    <a href="Homepage.dc.html" aria-label="Voltek Solar home" style="display:flex"><dc-import name="Logo" tone="{{ navTone }}" size="38" hint-size="140px,38px"></dc-import></a>
+    <sc-if value="{{ showLinks }}" hint-placeholder-val="{{ true }}">
+      <ul style="list-style:none;margin:0;padding:0;display:flex;gap:28px;font-size:16px;font-weight:500">
+        <sc-for list="{{ links }}" as="l" hint-placeholder-count="7">
+          <li><a href="{{ l.href }}" aria-current="{{ l.cur }}" style="color:{{ l.c }};padding:6px 0;border-bottom:1px solid {{ l.u }};transition:color .3s">{{ l.label }}</a></li>
+        </sc-for>
+      </ul>
+    </sc-if>
+    <div style="display:flex;align-items:center;gap:18px">
+      <sc-if value="{{ notMobile }}" hint-placeholder-val="{{ true }}">
+        <a href="tel:+441843000000" style="font-size:16px;font-weight:500;color:{{ navFg }};white-space:nowrap">01843 [XXX XXX]</a>
+      </sc-if>
+      <sc-if value="{{ notMobile }}" hint-placeholder-val="{{ true }}">
+        <a href="Book%20a%20Survey.dc.html" style="background:{{ btnBg }};color:{{ btnFg }};border-radius:999px;padding:13px 22px;font-size:16px;font-weight:600;white-space:nowrap;transition:all .3s" style-hover="background:linear-gradient(135deg,#E8B36A,#C9894A);color:#2B2724;transform:translateY(-1px)">Book Free Survey</a>
+      </sc-if>
+      <sc-if value="{{ showBurger }}" hint-placeholder-val="{{ false }}">
+        <button type="button" aria-label="Open menu" aria-expanded="{{ menuOpen }}" onClick="{{ toggleMenu }}" style="width:48px;height:48px;border-radius:999px;border:1px solid {{ navLine2 }};background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer">
+          <span style="width:18px;height:1.5px;background:{{ navFg }};transform:{{ bT }};transition:transform .3s"></span>
+          <span style="width:18px;height:1.5px;background:{{ navFg }};transform:{{ bB }};transition:transform .3s"></span>
+        </button>
+      </sc-if>
+    </div>
+  </nav>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="height:calc(100vh - 72px);overflow:auto;background:#F6F3EE;padding:24px clamp(20px,4vw,48px) 120px;display:flex;flex-direction:column;gap:4px">
+      <sc-for list="{{ links }}" as="l" hint-placeholder-count="7">
+        <a href="{{ l.href }}" style="font-size:34px;font-weight:500;letter-spacing:-0.03em;padding:12px 0;border-bottom:1px solid rgba(43,39,36,.12);color:#2B2724">{{ l.label }}</a>
+      </sc-for>
+      <a href="tel:+441843000000" style="margin-top:20px;font-size:18px;color:#5E564F">Call 01843 [XXX XXX]</a>
+    </div>
+  </sc-if>
+</header>
+<sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+  <nav aria-label="Quick actions" style="position:fixed;left:10px;right:10px;bottom:10px;z-index:60;display:grid;grid-template-columns:1fr 1fr 1.5fr;gap:6px;padding:6px;border-radius:22px;background:rgba(43,39,36,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 20px 40px -20px rgba(0,0,0,.5);font-family:'Inter Tight',system-ui,sans-serif">
+    <a href="tel:+441843000000" style="min-height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center;color:#F6F3EE;font-size:16px;font-weight:500">Call</a>
+    <a href="https://wa.me/[number]" style="min-height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center;color:#F6F3EE;font-size:16px;font-weight:500;border-left:1px solid rgba(246,243,238,.12)">WhatsApp</a>
+    <a href="Book%20a%20Survey.dc.html" style="min-height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#E8B36A,#C9894A);color:#2B2724;font-size:16px;font-weight:600">Book Survey</a>
+  </nav>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;hero&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;dark&quot;,&quot;light&quot;],&quot;default&quot;:&quot;dark&quot;,&quot;tsType&quot;:&quot;'dark'|'light'&quot;},&quot;current&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;reveal&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+const LINKS = [
+  ['Solar Panels', 'Homepage.dc.html#solutions', 'solar'], ['Batteries', 'Battery%20Storage.dc.html', 'battery'],
+  ['EV Chargers', 'Homepage.dc.html#scale', 'ev'], ['Commercial', 'Homepage.dc.html#scale', 'commercial'],
+  ['Projects', 'Projects.dc.html', 'projects'], ['About', 'Homepage.dc.html#why', 'about'], ['Contact', 'Homepage.dc.html#contact', 'contact']
+];
+class Component extends DCLogic {
+  state = { w: 1440, scrolled: false, menu: false };
+  componentDidMount() {
+    this.onResize = () => this.setState({ w: window.innerWidth });
+    this.onScroll = () => { const s = window.scrollY > 40; if (s !== this.state.scrolled) this.setState({ scrolled: s }); };
+    window.addEventListener('resize', this.onResize);
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    this.onResize(); this.onScroll();
+    if (this.props.reveal !== false) this.initReveal();
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.onResize);
+    window.removeEventListener('scroll', this.onScroll);
+    this.io && this.io.disconnect(); this.mo && this.mo.disconnect();
+  }
+  initReveal() {
+    this.io = new IntersectionObserver(es => es.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target, d = Number(el.getAttribute('data-reveal-delay') || 0);
+      this.io.unobserve(el);
+      el.style.opacity = '1'; el.style.transform = 'none';
+      setTimeout(() => { el.style.opacity = ''; el.style.transform = ''; el.style.transition = ''; }, 1100 + d);
+    }), { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    const scan = () => document.querySelectorAll('[data-reveal]:not([data-rv])').forEach(el => {
+      el.setAttribute('data-rv', '');
+      const d = Number(el.getAttribute('data-reveal-delay') || 0);
+      el.style.opacity = '0'; el.style.transform = 'translateY(32px)';
+      el.style.transition = `opacity 1s cubic-bezier(.2,.7,.2,1) ${d}ms, transform 1s cubic-bezier(.2,.7,.2,1) ${d}ms`;
+      requestAnimationFrame(() => this.io.observe(el));
+    });
+    scan();
+    this.mo = new MutationObserver(() => scan());
+    this.mo.observe(document.body, { childList: true, subtree: true });
+  }
+  renderVals() {
+    const s = this.state, w = s.w;
+    const darkHero = (this.props.hero ?? 'dark') === 'dark';
+    const solid = s.scrolled || s.menu;
+    const light = !solid && darkHero;
+    const navFg = light ? '#F6F3EE' : '#2B2724';
+    const cur = this.props.current ?? '';
+    const showLinks = w >= 1240;
+    return {
+      navBg: solid ? 'rgba(246,243,238,.9)' : 'transparent', navBlur: solid ? 'blur(14px)' : 'none',
+      navLine: solid ? 'rgba(43,39,36,.1)' : 'transparent', navLine2: light ? 'rgba(246,243,238,.35)' : 'rgba(43,39,36,.2)',
+      navH: s.scrolled ? '72px' : '88px', navFg, navTone: light ? 'onDark' : 'onLight',
+      btnBg: light ? '#F6F3EE' : '#2B2724', btnFg: light ? '#2B2724' : '#F6F3EE',
+      links: LINKS.map(([label, href, key]) => ({ label, href, cur: key === cur ? 'page' : undefined, c: navFg, u: key === cur ? '#C9894A' : 'transparent' })),
+      showLinks, showBurger: !showLinks, notMobile: w >= 760, isMobile: w < 760, menuOpen: s.menu,
+      toggleMenu: () => this.setState({ menu: !s.menu }),
+      bT: s.menu ? 'translateY(3.25px) rotate(45deg)' : 'none', bB: s.menu ? 'translateY(-3.25px) rotate(-45deg)' : 'none'
+    };
+  }
+}
+</script>
+</body>
+</html>

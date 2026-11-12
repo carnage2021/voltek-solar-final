@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>Book a Free Solar Survey | East Kent | Voltek Solar</title>
+  <meta name="description" content="Book your free, no-obligation solar, battery or EV charger survey with Voltek Solar. Local MCS-certified installers across Thanet, Canterbury and Dover.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#F6F3EE">
+  <link rel="canonical" href="https://www.[voltek-domain].co.uk/book-a-survey/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>body{margin:0;background:linear-gradient(180deg,#F6F3EE 0%,#F4E3D0 100%) fixed;color:#2B2724;font-family:'Inter Tight',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}*{box-sizing:border-box}a{color:inherit;text-decoration:none}a:hover{color:#A86A33}input[type=range]{accent-color:#C9894A}::selection{background:#E8B36A;color:#2B2724}</style>
+</helmet>
+<dc-import name="SiteNav" hero="light" hint-size="100%,0px"></dc-import>
+<main id="top" style="max-width:1400px;margin:0 auto;padding:clamp(120px,13vw,160px) clamp(20px,4vw,48px) clamp(80px,10vw,120px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:clamp(24px,4vw,56px);align-items:start">
+
+  <div style="display:flex;flex-direction:column;gap:28px;grid-column:span {{ formSpan }}">
+    <div data-reveal="" style="display:flex;flex-direction:column;gap:16px">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#A86A33">Free · no obligation · about 2 minutes</span>
+      <h1 style="margin:0;font-size:clamp(40px,5.6vw,80px);font-weight:500;letter-spacing:-0.04em;line-height:.98">Book a Free <span style="background:linear-gradient(110deg,#D9A05A,#A86A33);-webkit-background-clip:text;background-clip:text;color:transparent">Solar Survey</span></h1>
+    </div>
+
+    <div data-reveal="" data-reveal-delay="100" style="background:#F6F3EE;border-radius:28px;box-shadow:0 40px 80px -50px rgba(43,39,36,.4);border:1px solid rgba(43,39,36,.08);overflow:hidden">
+      <sc-if value="{{ notDone }}" hint-placeholder-val="{{ true }}">
+        <div style="padding:clamp(20px,3vw,32px) clamp(20px,3.4vw,44px) 0;display:flex;flex-direction:column;gap:14px">
+          <div style="display:flex;justify-content:space-between;font-size:15px"><span style="font-weight:600">Step {{ stepNum }} of 5 · {{ stepName }}</span><span style="color:#6E655D">{{ pct }}%</span></div>
+          <div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ pct }}" style="height:6px;border-radius:6px;background:#EEEBE6;overflow:hidden"><div style="height:100%;width:{{ pctW }};border-radius:6px;background:linear-gradient(90deg,#E8B36A,#C9894A);transition:width .6s cubic-bezier(.2,.8,.2,1)"></div></div>
+          <ol style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:6px">
+            <sc-for list="{{ stepList }}" as="s" hint-placeholder-count="5">
+              <li><button type="button" onClick="{{ s.go }}" disabled="{{ s.locked }}" style="width:100%;min-height:44px;border:none;background:none;padding:0;text-align:left;font-family:inherit;font-size:14px;color:{{ s.c }};font-weight:{{ s.fw }};cursor:{{ s.cur }}">{{ s.label }}</button></li>
+            </sc-for>
+          </ol>
+        </div>
+        <form onSubmit="{{ onSubmit }}" style="padding:clamp(20px,3vw,32px) clamp(20px,3.4vw,44px) clamp(24px,3.4vw,44px);display:flex;flex-direction:column;gap:28px;border-top:1px solid rgba(43,39,36,.1);margin-top:18px">
+          <div style="opacity:{{ animO }};transform:{{ animT }};transition:opacity .45s,transform .55s cubic-bezier(.2,.8,.2,1);min-height:360px;display:flex;flex-direction:column;gap:24px">
+            <h2 style="margin:0;font-size:clamp(26px,3vw,36px);font-weight:500;letter-spacing:-0.03em">{{ stepQ }}</h2>
+
+            <sc-if value="{{ s1 }}" hint-placeholder-val="{{ true }}">
+              <div role="radiogroup" aria-label="Service" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:10px">
+                <sc-for list="{{ services }}" as="o" hint-placeholder-count="6">
+                  <button type="button" role="radio" aria-checked="{{ o.sel }}" onClick="{{ o.on }}" style="min-height:96px;padding:18px;border-radius:18px;border:1px solid {{ o.line }};background:{{ o.bg }};color:{{ o.fg }};text-align:left;font-family:inherit;cursor:pointer;display:flex;flex-direction:column;justify-content:space-between;gap:8px;transition:all .3s" style-hover="transform:translateY(-2px)">
+                    <span style="font-size:18px;font-weight:600">{{ o.label }}</span><span style="font-size:15px;color:{{ o.muted }}">{{ o.d }}</span>
+                  </button>
+                </sc-for>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ s2 }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;flex-direction:column;gap:22px">
+                <sc-for list="{{ propGroups }}" as="g" hint-placeholder-count="3">
+                  <fieldset style="border:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px"><legend style="font-size:15px;font-weight:600;margin-bottom:10px;padding:0">{{ g.title }}</legend>
+                    <div style="display:flex;flex-wrap:wrap;gap:8px"><sc-for list="{{ g.opts }}" as="o" hint-placeholder-count="4"><button type="button" aria-pressed="{{ o.sel }}" onClick="{{ o.on }}" style="min-height:48px;padding:0 18px;border-radius:999px;border:1px solid {{ o.line }};background:{{ o.bg }};color:{{ o.fg }};font-family:inherit;font-size:16px;font-weight:500;cursor:pointer;transition:all .25s">{{ o.label }}</button></sc-for></div>
+                  </fieldset>
+                </sc-for>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ s3 }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;flex-direction:column;gap:22px">
+                <sc-for list="{{ roofGroups }}" as="g" hint-placeholder-count="2">
+                  <fieldset style="border:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px"><legend style="font-size:15px;font-weight:600;margin-bottom:10px;padding:0">{{ g.title }}</legend>
+                    <div style="display:flex;flex-wrap:wrap;gap:8px"><sc-for list="{{ g.opts }}" as="o" hint-placeholder-count="4"><button type="button" aria-pressed="{{ o.sel }}" onClick="{{ o.on }}" style="min-height:48px;padding:0 18px;border-radius:999px;border:1px solid {{ o.line }};background:{{ o.bg }};color:{{ o.fg }};font-family:inherit;font-size:16px;font-weight:500;cursor:pointer;transition:all .25s">{{ o.label }}</button></sc-for></div>
+                  </fieldset>
+                </sc-for>
+                <label style="display:flex;flex-direction:column;gap:12px;font-size:15px;font-weight:600">
+                  <span style="display:flex;justify-content:space-between;align-items:baseline"><span>Monthly electricity bill</span><span style="font-size:28px;font-weight:500;letter-spacing:-0.02em">£{{ bill }}</span></span>
+                  <input type="range" min="50" max="400" step="5" value="{{ bill }}" onInput="{{ setBill }}" style="width:100%;height:32px">
+                  <span style="display:flex;justify-content:space-between;font-size:14px;color:#6E655D;font-weight:400"><span>£50</span><span>£400+</span></span>
+                </label>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ s4 }}" hint-placeholder-val="{{ false }}">
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:14px">
+                <sc-for list="{{ fields }}" as="f" hint-placeholder-count="5">
+                  <label style="display:flex;flex-direction:column;gap:8px;font-size:15px;font-weight:600;grid-column:{{ f.col }}">{{ f.label }}
+                    <input type="{{ f.type }}" value="{{ f.val }}" onInput="{{ f.on }}" autocomplete="{{ f.ac }}" placeholder="{{ f.ph }}" style="height:56px;border-radius:14px;border:1px solid {{ f.line }};background:#fff;padding:0 16px;font-family:inherit;font-size:17px;color:#2B2724">
+                  </label>
+                </sc-for>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ s5 }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;flex-direction:column;gap:22px">
+                <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:8px">
+                  <sc-for list="{{ dates }}" as="d" hint-placeholder-count="12">
+                    <button type="button" aria-pressed="{{ d.sel }}" onClick="{{ d.on }}" style="min-height:84px;border-radius:16px;border:1px solid {{ d.line }};background:{{ d.bg }};color:{{ d.fg }};font-family:inherit;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;transition:all .25s">
+                      <span style="font-size:13px;color:{{ d.muted }}">{{ d.dow }}</span><span style="font-size:24px;font-weight:500;letter-spacing:-0.02em">{{ d.day }}</span><span style="font-size:13px;color:{{ d.muted }}">{{ d.mon }}</span>
+                    </button>
+                  </sc-for>
+                </div>
+                <fieldset style="border:none;margin:0;padding:0"><legend style="font-size:15px;font-weight:600;margin-bottom:10px;padding:0">Preferred time</legend>
+                  <div style="display:flex;flex-wrap:wrap;gap:8px"><sc-for list="{{ slots }}" as="o" hint-placeholder-count="3"><button type="button" aria-pressed="{{ o.sel }}" onClick="{{ o.on }}" style="min-height:48px;padding:0 18px;border-radius:999px;border:1px solid {{ o.line }};background:{{ o.bg }};color:{{ o.fg }};font-family:inherit;font-size:16px;font-weight:500;cursor:pointer;transition:all .25s">{{ o.label }}</button></sc-for></div>
+                </fieldset>
+                <span style="font-size:15px;color:#6E655D">We'll call to confirm the exact time. Weekend slots subject to availability.</span>
+              </div>
+            </sc-if>
+          </div>
+
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;border-top:1px solid rgba(43,39,36,.1);padding-top:22px">
+            <button type="button" onClick="{{ back }}" disabled="{{ atStart }}" style="min-height:56px;padding:0 22px;border-radius:999px;border:1px solid rgba(43,39,36,.2);background:transparent;font-family:inherit;font-size:16px;font-weight:500;color:#2B2724;cursor:pointer;opacity:{{ backO }}">← Back</button>
+            <span style="font-size:14px;color:#A8523A">{{ err }}</span>
+            <button type="submit" style="min-height:56px;padding:0 30px;border-radius:999px;border:none;background:{{ nextBg }};color:{{ nextFg }};font-family:inherit;font-size:17px;font-weight:600;cursor:pointer;transition:all .3s" style-hover="transform:translateY(-1px)">{{ nextLabel }}</button>
+          </div>
+        </form>
+      </sc-if>
+
+      <sc-if value="{{ done }}" hint-placeholder-val="{{ false }}">
+        <div style="padding:clamp(32px,5vw,64px);display:flex;flex-direction:column;gap:22px;min-height:560px;justify-content:center;background:radial-gradient(circle at 85% 10%,rgba(232,179,106,.25),transparent 55%),#F6F3EE">
+          <dc-import name="Logo" size="64" wordmark="false" hint-size="64px,64px"></dc-import>
+          <h2 style="margin:0;font-size:clamp(34px,4.4vw,56px);font-weight:500;letter-spacing:-0.035em;line-height:1">You're booked in, {{ firstName }}.</h2>
+          <p style="margin:0;font-size:18px;line-height:1.6;color:#5E564F;max-width:520px">We've pencilled in <strong style="color:#2B2724">{{ dateText }}</strong>. A local adviser will call within [X] working hours to confirm, and you'll get an email at {{ emailText }}.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:12px"><a href="Homepage.dc.html" style="display:inline-flex;align-items:center;min-height:52px;padding:0 24px;border-radius:999px;background:#2B2724;color:#F6F3EE;font-weight:600">Back to homepage</a><a href="Projects.dc.html" style="display:inline-flex;align-items:center;min-height:52px;padding:0 24px;border-radius:999px;border:1px solid rgba(43,39,36,.25);font-weight:500">See recent projects</a></div>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+
+  <aside data-reveal="" data-reveal-delay="200" aria-label="Your booking" style="position:{{ asidePos }};top:110px;display:flex;flex-direction:column;gap:16px">
+    <div style="background:#2B2724;color:#F6F3EE;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:18px">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#E8B36A">Your survey</span>
+      <dl style="margin:0;display:flex;flex-direction:column">
+        <sc-for list="{{ summary }}" as="r" hint-placeholder-count="5">
+          <div style="display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid rgba(246,243,238,.12)"><dt style="font-size:15px;color:#A89D92">{{ r.k }}</dt><dd style="margin:0;font-size:15px;font-weight:500;text-align:right;color:{{ r.c }}">{{ r.v }}</dd></div>
+        </sc-for>
+      </dl>
+    </div>
+    <div style="background:#F6F3EE;border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:12px;border:1px solid rgba(43,39,36,.08)">
+      <strong style="font-size:18px;font-weight:600">What happens next</strong>
+      <ol style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px;font-size:16px;line-height:1.5;color:#5E564F"><li>We call to confirm your slot.</li><li>A local adviser visits (about an hour).</li><li>You get a fixed quote and system design.</li></ol>
+      <span style="font-size:15px;color:#6E655D">Prefer to talk? <a href="tel:+441843000000" style="color:#2B2724;font-weight:600;text-decoration:underline">01843 [XXX XXX]</a></span>
+    </div>
+  </aside>
+</main>
+<dc-import name="SiteFooter" hint-size="100%,520px"></dc-import>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const SERVICES = [['solar', 'Solar panels', 'New rooftop system'], ['solar-battery', 'Solar + battery', 'Generate and store'], ['battery', 'Battery add-on', 'For existing solar'], ['ev', 'EV charger', 'Home charging'], ['commercial', 'Commercial solar', 'Business, farm, school'], ['repair', 'Maintenance & repairs', 'Checks and faults']];
+const STEPS = [['Service', 'What are you interested in?'], ['Property', 'Tell us about your property'], ['Roof & bill', 'Your roof and energy use'], ['Contact', 'How can we reach you?'], ['Date', 'Pick a preferred survey date']];
+const TOWN_PC = { margate: 'CT9', ramsgate: 'CT11', broadstairs: 'CT10', canterbury: 'CT1', 'herne-bay': 'CT6', whitstable: 'CT5', deal: 'CT14', dover: 'CT16', sandwich: 'CT13', folkestone: 'CT20' };
+class Component extends DCLogic {
+  state = { step: 0, maxStep: 0, anim: 1, done: false, tried: false, service: '', ptype: '', owner: '', storeys: '', facing: '', shade: '', bill: 150, name: '', email: '', phone: '', postcode: '', date: '', slot: 'Morning' };
+  componentDidMount() {
+    const q = new URLSearchParams(location.search);
+    const sv = q.get('service'); const t = q.get('town');
+    const patch = {};
+    if (sv && SERVICES.some(s => s[0] === sv)) patch.service = sv;
+    if (t && TOWN_PC[t]) patch.postcode = TOWN_PC[t] + ' ';
+    if (Object.keys(patch).length) this.setState(patch);
+  }
+  valid(i) {
+    const s = this.state;
+    if (i === 0) return !!s.service;
+    if (i === 1) return !!(s.ptype && s.owner);
+    if (i === 2) return !!s.facing;
+    if (i === 3) return s.name.trim().length > 1 && /\S+@\S+\.\S+/.test(s.email) && s.phone.replace(/\D/g, '').length >= 10 && s.postcode.trim().length >= 3;
+    if (i === 4) return !!s.date;
+    return true;
+  }
+  go(i) {
+    this.setState({ anim: 0 });
+    setTimeout(() => { this.setState(s => ({ step: i, maxStep: Math.max(s.maxStep, i), anim: 1, tried: false })); window.scrollTo({ top: 0, behavior: 'smooth' }); }, 220);
+  }
+  next(e) {
+    e.preventDefault();
+    const s = this.state;
+    if (!this.valid(s.step)) { this.setState({ tried: true }); return; }
+    if (s.step === 4) { this.setState({ done: true }); window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
+    this.go(s.step + 1);
+  }
+  opt(key, label, extra) {
+    const sel = this.state[key] === label;
+    return { label, sel, on: () => this.setState({ [key]: label }), bg: sel ? '#2B2724' : '#fff', fg: sel ? '#F6F3EE' : '#2B2724', line: sel ? '#2B2724' : 'rgba(43,39,36,.2)', ...(extra || {}) };
+  }
+  renderVals() {
+    const s = this.state, w = typeof window !== 'undefined' ? window.innerWidth : 1440;
+    const svc = SERVICES.find(x => x[0] === s.service);
+    const dates = [];
+    const d0 = new Date(); d0.setDate(d0.getDate() + 2);
+    while (dates.length < 12) { if (d0.getDay() !== 0) dates.push(new Date(d0)); d0.setDate(d0.getDate() + 1); }
+    const fmtD = d => d.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' });
+    const ok = this.valid(s.step);
+    const field = (key, label, type, ac, ph, col) => ({ label, type, ac, ph, col: col || 'auto', val: s[key], on: e => this.setState({ [key]: e.target.value }), line: s.tried && !this.valid(3) && !String(s[key]).trim() ? '#A8523A' : 'rgba(43,39,36,.2)' });
+    const pct = Math.round((s.step + (ok ? 1 : 0.5)) / 5 * 100);
+    const selDate = dates.find(d => d.toISOString().slice(0, 10) === s.date);
+    return {
+      formSpan: w >= 1100 ? 2 : 1, asidePos: w >= 1100 ? 'sticky' : 'static',
+      notDone: !s.done, done: s.done,
+      stepNum: s.step + 1, stepName: STEPS[s.step][0], stepQ: STEPS[s.step][1], pct, pctW: pct + '%',
+      stepList: STEPS.map(([label], i) => ({ label: (i + 1) + '. ' + label, go: () => i <= s.maxStep && i !== s.step && this.go(i), locked: i > s.maxStep, c: i === s.step ? '#2B2724' : i <= s.maxStep ? '#5E564F' : '#A89D92', fw: i === s.step ? 600 : 400, cur: i <= s.maxStep ? 'pointer' : 'default' })),
+      animO: s.anim, animT: s.anim ? 'none' : 'translateY(16px)',
+      s1: s.step === 0, s2: s.step === 1, s3: s.step === 2, s4: s.step === 3, s5: s.step === 4,
+      services: SERVICES.map(([k, label, d]) => { const sel = s.service === k; return { label, d, sel, on: () => this.setState({ service: k }), bg: sel ? '#2B2724' : '#fff', fg: sel ? '#F6F3EE' : '#2B2724', muted: sel ? '#C9BFB4' : '#6E655D', line: sel ? '#2B2724' : 'rgba(43,39,36,.16)' }; }),
+      propGroups: [
+        { title: 'Property type', opts: ['Terraced', 'Semi-detached', 'Detached', 'Bungalow', 'Flat', 'Business / farm'].map(l => this.opt('ptype', l)) },
+        { title: 'Do you own the property?', opts: ['Yes, I own it', 'Landlord', 'Tenant'].map(l => this.opt('owner', l)) },
+        { title: 'Storeys', opts: ['1', '2', '3+'].map(l => this.opt('storeys', l)) }
+      ],
+      roofGroups: [
+        { title: 'Which way does your main roof face?', opts: ['South', 'East / West', 'North', 'Not sure'].map(l => this.opt('facing', l)) },
+        { title: 'Any shading?', opts: ['None', 'Some', 'A lot', 'Not sure'].map(l => this.opt('shade', l)) }
+      ],
+      bill: s.bill, setBill: e => this.setState({ bill: Number(e.target.value) }),
+      fields: [field('name', 'Full name', 'text', 'name', '', '1 / -1'), field('email', 'Email', 'email', 'email', ''), field('phone', 'Phone', 'tel', 'tel', '07…'), field('postcode', 'Postcode', 'text', 'postal-code', 'e.g. CT1 2AB', '1 / -1')],
+      dates: dates.map(d => { const k = d.toISOString().slice(0, 10), sel = s.date === k; return { dow: d.toLocaleDateString('en-GB', { weekday: 'short' }), day: d.getDate(), mon: d.toLocaleDateString('en-GB', { month: 'short' }), sel, on: () => this.setState({ date: k }), bg: sel ? '#2B2724' : '#fff', fg: sel ? '#F6F3EE' : '#2B2724', muted: sel ? '#E8B36A' : '#6E655D', line: sel ? '#2B2724' : 'rgba(43,39,36,.16)' }; }),
+      slots: ['Morning', 'Afternoon', 'Evening'].map(l => this.opt('slot', l)),
+      onSubmit: e => this.next(e), back: () => s.step > 0 && this.go(s.step - 1), atStart: s.step === 0, backO: s.step === 0 ? 0.35 : 1,
+      err: s.tried && !ok ? (s.step === 3 ? 'Please complete all contact fields.' : 'Please choose an option to continue.') : '',
+      nextLabel: s.step === 4 ? 'Book My Free Survey' : 'Continue →',
+      nextBg: s.step === 4 ? 'linear-gradient(135deg,#E8B36A,#C9894A)' : '#2B2724', nextFg: s.step === 4 ? '#2B2724' : '#F6F3EE',
+      summary: [['Service', svc ? svc[1] : '—'], ['Property', s.ptype || '—'], ['Roof', s.facing ? s.facing + (s.shade ? ' · ' + s.shade.toLowerCase() + ' shade' : '') : '—'], ['Monthly bill', s.step >= 2 ? '£' + s.bill : '—'], ['Postcode', s.postcode.trim().toUpperCase() || '—'], ['Date', selDate ? fmtD(selDate) + ' · ' + s.slot : '—']].map(([k, v]) => ({ k, v, c: v === '—' ? '#8F857B' : '#F6F3EE' })),
+      firstName: (s.name.trim().split(' ')[0]) || 'there', dateText: selDate ? fmtD(selDate) + ' (' + s.slot.toLowerCase() + ')' : '', emailText: s.email
+    };
+  }
+}
+</script>
+</body>
+</html>

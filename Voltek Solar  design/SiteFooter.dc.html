@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<footer style="background:#1F1C1A;color:#F6F3EE;font-family:'Inter Tight',system-ui,sans-serif;padding-bottom:{{ pad }}">
+  <div style="max-width:1400px;margin:0 auto;padding:72px clamp(20px,4vw,48px) 32px;display:flex;flex-direction:column;gap:56px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:40px">
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <dc-import name="Logo" tone="onDark" size="44" hint-size="160px,44px"></dc-import>
+        <p style="margin:0;font-size:16px;line-height:1.6;color:#C9BFB4;max-width:340px">MCS-certified solar, battery and EV charger installers serving homes and businesses across East Kent.</p>
+      </div>
+      <nav aria-label="Company" style="display:flex;flex-direction:column;gap:12px;font-size:16px;color:#C9BFB4"><strong style="color:#F6F3EE;font-weight:600;margin-bottom:4px">Company</strong><a href="Homepage.dc.html#why" style="color:inherit">About</a><a href="Projects.dc.html" style="color:inherit">Projects</a><a href="Homepage.dc.html#faq" style="color:inherit">FAQ</a><a href="Book%20a%20Survey.dc.html" style="color:inherit">Book a Survey</a><a href="Homepage.dc.html#contact" style="color:inherit">Contact</a></nav>
+      <nav aria-label="Services" style="display:flex;flex-direction:column;gap:12px;font-size:16px;color:#C9BFB4"><strong style="color:#F6F3EE;font-weight:600;margin-bottom:4px">Services</strong><a href="Homepage.dc.html#solutions" style="color:inherit">Solar panels</a><a href="Battery%20Storage.dc.html" style="color:inherit">Battery storage</a><a href="Battery%20Storage.dc.html" style="color:inherit">Battery add-on</a><a href="Homepage.dc.html#scale" style="color:inherit">EV chargers</a><a href="Homepage.dc.html#scale" style="color:inherit">Commercial solar</a><a href="Homepage.dc.html#solutions" style="color:inherit">Maintenance &amp; repairs</a></nav>
+      <nav aria-label="Areas covered" style="display:flex;flex-direction:column;gap:12px;font-size:16px;color:#C9BFB4"><strong style="color:#F6F3EE;font-weight:600;margin-bottom:4px">Areas</strong><sc-for list="{{ towns }}" as="t" hint-placeholder-count="10"><a href="{{ t.href }}" style="color:inherit">Solar panels {{ t.name }}</a></sc-for></nav>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px">
+      <sc-for list="{{ trust }}" as="t" hint-placeholder-count="4"><div style="height:44px;padding:0 16px;border-radius:10px;border:1px dashed rgba(246,243,238,.25);display:flex;align-items:center;font-family:'JetBrains Mono',monospace;font-size:13px;color:#A89D92">{{ t }}</div></sc-for>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px;padding-top:24px;border-top:1px solid rgba(246,243,238,.12);font-size:15px;color:#A89D92">
+      <span>© 2026 Voltek Solar Ltd · Company no. [XXXXXXXX]</span>
+      <div style="display:flex;flex-wrap:wrap;gap:20px"><a href="#" style="color:inherit">Privacy</a><a href="#" style="color:inherit">Cookies</a><a href="#" style="color:inherit">Terms</a><a href="#" style="color:inherit">Complaints</a></div>
+      <a href="#top" onClick="{{ toTop }}" style="display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 20px;border-radius:999px;border:1px solid rgba(246,243,238,.25);color:#F6F3EE;transition:all .3s" style-hover="background:#F6F3EE;color:#2B2724">Back to top ↑</a>
+    </div>
+  </div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { w: 1440 };
+  componentDidMount() { this.r = () => this.setState({ w: window.innerWidth }); window.addEventListener('resize', this.r); this.r(); }
+  componentWillUnmount() { window.removeEventListener('resize', this.r); }
+  renderVals() {
+    const names = ['Margate', 'Ramsgate', 'Broadstairs', 'Canterbury', 'Herne Bay', 'Whitstable', 'Deal', 'Dover', 'Sandwich', 'Folkestone'];
+    return {
+      pad: this.state.w < 760 ? '84px' : '0',
+      towns: names.map(name => ({ name, href: 'Town%20Page.dc.html?town=' + name.toLowerCase().replace(/\s/g, '-') })),
+      trust: ['MCS', 'NICEIC / NAPIT', 'RECC / HIES', 'TrustMark'],
+      toTop: e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+    };
+  }
+}
+</script>
+</body>
+</html>
